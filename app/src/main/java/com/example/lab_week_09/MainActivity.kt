@@ -26,6 +26,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lab_week_09.ui.theme.LAB_WEEK_09Theme
+import com.example.lab_week_09.ui.theme.OnBackgroundItemText
+import com.example.lab_week_09.ui.theme.OnBackgroundTitleText
+import com.example.lab_week_09.ui.theme.PrimaryTextButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,10 +83,13 @@ fun HomeContent(
     LazyColumn {
         item {
             Column(
-                modifier = Modifier.padding(16.dp).fillMaxSize(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = stringResource(
+                //Here, we call the OnBackgroundTitleText UI Element
+                OnBackgroundTitleText(text = stringResource(
                     id = R.string.enter_item)
                 )
                 TextField(
@@ -95,21 +101,27 @@ fun HomeContent(
                         onInputValueChange(it)
                     }
                 )
-                Button(onClick = {
+                //Here, we call the PrimaryTextButton UI Element
+                //Here, we call the PrimaryTextButton UI Element
+                PrimaryTextButton(text = stringResource(
+                    id = R.string.button_click)
+                ) {
                     onButtonClick()
-                }) {
-                    Text(text = stringResource(
-                        id = R.string.button_click)
-                    )
                 }
             }
         }
+        //Here, we use items to display a list of items inside the LazyColumn
+        //This is the RecyclerView replacement
+        //We pass the listData as a parameter
         items(listData) { item ->
             Column(
-                modifier = Modifier.padding(vertical = 4.dp).fillMaxSize(),
+                modifier = Modifier
+                    .padding(vertical = 4.dp)
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = item.name)
+                //Here, we call the OnBackgroundItemText UI Element
+                OnBackgroundItemText(text = item.name)
             }
         }
     }
